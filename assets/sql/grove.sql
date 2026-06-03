@@ -41,7 +41,6 @@ CREATE TABLE participations (
 );
 
 
-
 ## TESTE DE DADOS
 
 INSERT INTO categories (name) VALUES 
