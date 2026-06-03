@@ -1,0 +1,56 @@
+root {
+    --color-primary: #1D9E75;
+    --color-primary-dark: #0f6e56;
+    --color-background: #f8f9f4;
+    --color-text: #2c2c2a;
+    --color-card-shadow: rgba(0,0,0,0.08);
+    --color-badge-bg: #e1f5ee;
+    --color-badge-text: #0f6e56;
+    --border-radius-card: 12px;
+    --border-radius-badge: 20px;
+}
+
+body {
+    background-color: var(--color-background);
+    color: var(--color-text);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.navbar-brand {
+    font-weight: 600;
+    font-size: 1.3rem;
+}
+
+.card {
+    border: none;
+    border-radius: var(--border-radius-card);
+    box-shadow: 0 2px 8px var(--color-card-shadow);
+    margin-bottom: 1.5rem;
+}
+
+.card-title {
+    font-weight: 600;
+    color: var(--color-primary-dark);
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.btn-primary:hover {
+    background-color: var(--color-primary-dark);
+    border-color: var(--color-primary-dark);
+}
+
+.alert {
+    border-radius: 8px;
+}
+
+.badge-category {
+    background-color: var(--color-badge-bg);
+    color: var(--color-badge-text);
+    padding: 4px 10px;
+    border-radius: var(--border-radius-badge);
+    font-size: 0.75rem;
+}
