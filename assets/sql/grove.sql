@@ -39,3 +39,23 @@ CREATE TABLE participations (
     FOREIGN KEY (id_user) REFERENCES users(id_user),
     FOREIGN KEY (id_initiative) REFERENCES initiatives(id_initiative)
 );
+
+
+
+## TESTE DE DADOS
+
+INSERT INTO categories (name) VALUES 
+('Energy'),
+('Food'),
+('Recycling'),
+('Biodiversity'),
+('Community');
+
+INSERT INTO users (name, email, password, birthdate, gender) VALUES
+('Paula Teste', 'paula@grove.com', '123456', '2001-12-25', 'Female');
+
+INSERT INTO initiatives (title, description, location, impact_description, id_user, id_category) VALUES
+('Community Garden Porto', 'A shared garden open to everyone in the Porto neighbourhood.', 'Porto', '30 families benefited', 1, 2);
+
+INSERT INTO participations (status, id_user, id_initiative) VALUES
+('active', 1, 1);
