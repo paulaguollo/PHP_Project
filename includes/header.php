@@ -16,7 +16,7 @@ if (session_status() === PHP_SESSION_NONE) {
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-        <a class="navbar-brand" href="/grove/index.php">🌿 Grove</a>
+        <a class="navbar-brand" href="/grove/index.php">Grove</a>
         <div class="collapse navbar-collapse">
             <ul class="navbar-nav ms-auto">
                 <?php if (isset($_SESSION['id_user'])): ?>
