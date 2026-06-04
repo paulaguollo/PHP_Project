@@ -1,1 +1,0 @@
-# Área privada do utilizador
