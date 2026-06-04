@@ -13,8 +13,8 @@ if (!isset($_POST['id_initiative'])) {
 $id_initiative = $_POST['id_initiative'];
 $id_user = $_SESSION['id_user'];
 
-$sql = "DELETE FROM participations WHERE id_initiative = :id_initiative";
-$db->executeQuery($sql, ['id_initiative' => $id_initiative]);
+$sqlDelete = "DELETE FROM participations WHERE id_initiative = :id_initiative";
+$db->executeQuery($sqlDelete, ['id_initiative' => $id_initiative]);
 
 $sql = "DELETE FROM initiatives 
         WHERE id_initiative = :id_initiative AND id_user = :id_user";
@@ -24,7 +24,7 @@ $result = $db->executeQuery($sql, [
     'id_user' => $id_user
 ]);
 
-if ($result > 0) {
+if ($result['status'] === 'success') {
     header('Location: index.php?res=deleted');
 } else {
     header('Location: index.php?res=error');

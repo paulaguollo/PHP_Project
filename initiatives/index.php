@@ -11,16 +11,21 @@ $sql = "SELECT initiatives.*, users.name AS author, categories.name AS category
         JOIN categories ON initiatives.id_category = categories.id_category
         ORDER BY initiatives.created_at DESC";
 
-$initiatives = $db->fetchQuery($sql, []);
+$result = $db->fetchQuery($sql, []);
+$initiatives = $result['status'] === 'success' ? $result['data'] : [];
 ?>
 
 <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2>Initiatives</h2>
+        <h2>Initiatives </h2>
         <?php if (isset($_SESSION['id_user'])): ?>
             <a href="create.php" class="btn btn-primary">+ New initiative</a>
         <?php endif; ?>
     </div>
+
+    <?php if (isset($_GET['res']) && $_GET['res'] === 'ok'): ?>
+        <div class="alert alert-success">Initiative created successfully!</div>
+    <?php endif; ?>
 
     <?php if (empty($initiatives)): ?>
         <p class="text-muted">No initiatives yet. Be the first to create one!</p>
@@ -31,7 +36,7 @@ $initiatives = $db->fetchQuery($sql, []);
                     <h5><?= htmlspecialchars($initiative->title) ?></h5>
                     <span class="badge-category"><?= htmlspecialchars($initiative->category) ?></span>
                 </div>
-                <p class="text-muted mb-1">📍 <?= htmlspecialchars($initiative->location) ?></p>
+                <p class="text-muted mb-1">Location <?= htmlspecialchars($initiative->location) ?></p>
                 <p><?= htmlspecialchars($initiative->description) ?></p>
                 <a href="detail.php?id=<?= $initiative->id_initiative ?>" class="btn btn-sm btn-primary">View</a>
             </div>

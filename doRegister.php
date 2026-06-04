@@ -29,7 +29,7 @@ $result = $db->executeQuery($sql, [
     'gender' => $gender
 ]);
 
-if ($result > 0) {
+if ($result['status'] === 'success') {
     header('Location: login.php?res=ok');
 } else {
     header('Location: register.php?res=error');

@@ -34,7 +34,7 @@ $result = $db->executeQuery($sql, [
     'id_category' => $id_category
 ]);
 
-if ($result > 0) {
+if ($result['status'] === 'success') {
     header('Location: index.php?res=ok');
 } else {
     header('Location: create.php?res=error');

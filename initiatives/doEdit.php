@@ -38,7 +38,7 @@ $result = $db->executeQuery($sql, [
     'id_user' => $id_user
 ]);
 
-if ($result > 0) {
+if ($result['status'] === 'success') {
     header('Location: detail.php?id=' . $id_initiative);
 } else {
     header('Location: edit.php?id=' . $id_initiative . '&res=error');

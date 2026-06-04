@@ -19,6 +19,23 @@ $sql = "SELECT initiatives.*, users.name AS author, categories.name AS category
         WHERE initiatives.id_initiative = :id";
 
 $result = $db->fetchQuery($sql, ['id' => $id]);
+$initiative = $result['status'] === 'success' && !empty($result['data']) ? $result['data'][0] : null;
+
+if (!$initiative) {
+    header('Location: index.php');
+    exit;
+}
+
+$alreadyParticipating = false;
+if (isset($_SESSION['id_user'])) {
+    $sql = "SELECT * FROM participations 
+            WHERE id_user = :id_user AND id_initiative = :id_initiative";
+    $participationResult = $db->fetchQuery($sql, [
+        'id_user' => $_SESSION['id_user'],
+        'id_initiative' => $id
+    ]);
+    $alreadyParticipating = $participationResult['status'] === 'success' && !empty($participationResult['data']);
+}
 
 if (empty($result)) {
     header('Location: index.php');

@@ -20,9 +20,9 @@ if (empty($email) || empty($password)) {
 $sql = "SELECT * FROM users WHERE email = :email";
 $result = $db->fetchQuery($sql, ['email' => $email]);
 
-if (!empty($result) && password_verify($password, $result[0]->password)) {
-    $_SESSION['id_user'] = $result[0]->id_user;
-    $_SESSION['name'] = $result[0]->name;
+if ($result['status'] === 'success' && !empty($result['data']) && password_verify($password, $result['data'][0]->password)) {
+    $_SESSION['id_user'] = $result['data'][0]->id_user;
+    $_SESSION['name'] = $result['data'][0]->name;
     header('Location: dashboard.php');
 } else {
     header('Location: login.php?res=error');

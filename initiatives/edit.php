@@ -21,8 +21,16 @@ if (empty($result)) {
     exit;
 }
 
-$initiative = $result[0];
-$categories = $db->fetchQuery("SELECT * FROM categories", []);
+$result = $db->fetchQuery($sql, ['id' => $id, 'id_user' => $_SESSION['id_user']]);
+$initiative = $result['status'] === 'success' && !empty($result['data']) ? $result['data'][0] : null;
+
+if (!$initiative) {
+    header('Location: index.php');
+    exit;
+}
+
+$resultCategories = $db->fetchQuery("SELECT * FROM categories", []);
+$categories = $resultCategories['status'] === 'success' ? $resultCategories['data'] : [];
 ?>
 
 <div class="container mt-5">

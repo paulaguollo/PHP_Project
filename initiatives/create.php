@@ -1,5 +1,3 @@
-# Formulário de criação
-
 <?php
 session_start();
 require_once '../includes/auth.php';
@@ -8,7 +6,8 @@ require_once '../includes/header.php';
 
 $db = new Database();
 
-$categories = $db->fetchQuery("SELECT * FROM categories", []);
+$result = $db->fetchQuery("SELECT * FROM categories", []);
+$categories = $result['status'] === 'success' ? $result['data'] : [];
 ?>
 
 <div class="container mt-5">

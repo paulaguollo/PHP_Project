@@ -13,20 +13,33 @@ class Database
 
     public function fetchQuery($sql, $params = [])
     {
-        $pdo = $this->connect();
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute($params);
-        return $stmt->fetchAll(PDO::FETCH_OBJ);
+        try {
+            $pdo = $this->connect();
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute($params);
+            $results = $stmt->fetchAll(PDO::FETCH_CLASS);
+            return ['status' => 'success', 'data' => $results];
+        } catch (PDOException $e) {
+            return ['status' => 'error', 'data' => $e->getMessage()];
+        }
     }
 
     public function executeQuery($sql, $params = [])
     {
-        $pdo = $this->connect();
-        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute($params);
-        return $stmt->rowCount();
+        try {
+            $pdo = $this->connect();
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute($params);
+            return [
+                'status' => 'success',
+                'lastID' => $pdo->lastInsertId(),
+                'affectedRows' => $stmt->rowCount()
+            ];
+        } catch (PDOException $e) {
+            return ['status' => 'error', 'data' => $e->getMessage()];
+        }
     }
 }
 ?>
