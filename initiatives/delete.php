@@ -13,20 +13,14 @@ if (!isset($_GET['id'])) {
 
 $id = $_GET['id'];
 
+$sql = "SELECT * FROM initiatives WHERE id_initiative = :id AND id_user = :id_user";
 $result = $db->fetchQuery($sql, ['id' => $id, 'id_user' => $_SESSION['id_user']]);
-$initiative = $result['status'] === 'success' && !empty($result['data']) ? $result['data'][0] : null;
+$initiative = ($result['status'] === 'success' && !empty($result['data'])) ? $result['data'][0] : null;
 
 if (!$initiative) {
     header('Location: index.php');
     exit;
 }
-
-if (empty($result)) {
-    header('Location: index.php');
-    exit;
-}
-
-$initiative = $result[0];
 ?>
 
 <div class="container mt-5">

@@ -36,24 +36,6 @@ if (isset($_SESSION['id_user'])) {
     ]);
     $alreadyParticipating = $participationResult['status'] === 'success' && !empty($participationResult['data']);
 }
-
-if (empty($result)) {
-    header('Location: index.php');
-    exit;
-}
-
-$initiative = $result[0];
-
-$alreadyParticipating = false;
-if (isset($_SESSION['id_user'])) {
-    $sql = "SELECT * FROM participations 
-            WHERE id_user = :id_user AND id_initiative = :id_initiative";
-    $participation = $db->fetchQuery($sql, [
-        'id_user' => $_SESSION['id_user'],
-        'id_initiative' => $id
-    ]);
-    $alreadyParticipating = !empty($participation);
-}
 ?>
 
 <div class="container mt-5">
@@ -65,9 +47,9 @@ if (isset($_SESSION['id_user'])) {
             <span class="badge-category"><?= htmlspecialchars($initiative->category) ?></span>
         </div>
 
-        <p class="text-muted">Location<?= htmlspecialchars($initiative->location) ?></p>
-        <p class="text-muted">User <?= htmlspecialchars($initiative->author) ?></p>
-        <p class="text-muted">Date<?= $initiative->created_at ?></p>
+        <p class="text-muted">📍 <?= htmlspecialchars($initiative->location) ?></p>
+        <p class="text-muted">👤 <?= htmlspecialchars($initiative->author) ?></p>
+        <p class="text-muted">📅 <?= $initiative->created_at ?></p>
 
         <hr>
         <p><?= htmlspecialchars($initiative->description) ?></p>
@@ -84,7 +66,7 @@ if (isset($_SESSION['id_user'])) {
                 <a href="edit.php?id=<?= $initiative->id_initiative ?>" class="btn btn-primary">Edit</a>
                 <a href="delete.php?id=<?= $initiative->id_initiative ?>" class="btn btn-danger ms-2">Delete</a>
             <?php elseif ($alreadyParticipating): ?>
-                <p class="text-success">You are already participating in this initiative.</p>
+                <p class="text-success">✅ You are already participating in this initiative.</p>
                 <a href="../participations/cancel.php?id_initiative=<?= $initiative->id_initiative ?>" class="btn btn-outline-danger">Cancel participation</a>
             <?php else: ?>
                 <a href="../participations/join.php?id_initiative=<?= $initiative->id_initiative ?>" class="btn btn-primary">Join initiative</a>
