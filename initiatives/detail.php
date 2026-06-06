@@ -19,7 +19,7 @@ $sql = "SELECT initiatives.*, users.name AS author, categories.name AS category
         WHERE initiatives.id_initiative = :id";
 
 $result = $db->fetchQuery($sql, ['id' => $id]);
-$initiative = $result['status'] === 'success' && !empty($result['data']) ? $result['data'][0] : null;
+$initiative = ($result['status'] === 'success' && !empty($result['data'])) ? $result['data'][0] : null;
 
 if (!$initiative) {
     header('Location: index.php');
