@@ -1,6 +1,3 @@
-## VAI ESTAR PRAS PAGINAS PRIVADAS
-## TEM QUE TER SESSAO ATIVA
-
 <?php
 if (session_status() === PHP_SESSION_NONE) {
     session_start();

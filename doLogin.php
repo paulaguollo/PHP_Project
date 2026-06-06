@@ -23,7 +23,7 @@ $result = $db->fetchQuery($sql, ['email' => $email]);
 if ($result['status'] === 'success' && !empty($result['data']) && password_verify($password, $result['data'][0]->password)) {
     $_SESSION['id_user'] = $result['data'][0]->id_user;
     $_SESSION['name'] = $result['data'][0]->name;
-    header('Location: dashboard.php');
+    header('Location: profile.php');
 } else {
     header('Location: login.php?res=error');
 }

@@ -25,7 +25,7 @@ $initiatives = $result['status'] === 'success' ? $result['data'] : [];
             <a href="login.php" class="btn btn-outline-secondary">Login</a>
         <?php else: ?>
             <a href="initiatives/create.php" class="btn btn-primary me-2">+ New initiative</a>
-            <a href="dashboard.php" class="btn btn-outline-secondary">Dashboard</a>
+            <a href="profile.php" class="btn btn-outline-secondary">Profile</a>
         <?php endif; ?>
     </div>
 
