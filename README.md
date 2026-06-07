@@ -1,170 +1,221 @@
-# 🌿 Grove
+# Grove
 ### *Where impact grows.*
 
-Grove é uma plataforma web colaborativa onde pessoas, comunidades e organizações publicam, descobrem e participam em **iniciativas de impacto sustentável** — desde hortas comunitárias a projetos de energia solar, reciclagem local e economia circular.
+Grove is a full-stack web platform where individuals, communities, and organizations can **publish, discover, and join sustainable impact initiatives**, from community gardens to solar energy projects, local recycling campaigns, and circular economy efforts.
 
-A plataforma combina um background em economia e sustentabilidade com tecnologia web moderna, permitindo que qualquer utilizador contribua para um mundo mais sustentável, acompanhando o impacto real gerado por cada iniciativa.
+Built as a final project for the **Web Development (Back-end)** subject at CESAE Digital, Grove demonstrates a complete application with authentication, two full CRUD entities, relational database design, and security best practices.
 
 ---
 
-## 🛠️ Tecnologias Utilizadas
+## Project Overview
 
-| Camada | Tecnologia |
+The platform addresses a real gap: there is no simple, open tool for people to organize and track local sustainability initiatives and measure their collective impact. Grove fills that gap by connecting people who want to act with projects that need support.
+
+**Core flow:**
+1. Anyone can browse and discover initiatives
+2. Registered users can create their own initiatives
+3. Other users can join initiatives as collaborators
+4. Each initiative tracks its location, category, and impact description
+5. Users manage everything through their profile
+
+---
+
+## 🛠️ Technologies
+
+| Layer | Technology |
 |---|---|
 | Front-end | HTML5, CSS3, Bootstrap 5, JavaScript |
-| Back-end | PHP (procedural) |
-| Base de Dados | MySQL |
-| Segurança | PDO, prepared statements, sessões PHP |
-| Versionamento | Git + GitHub |
+| Back-end | PHP 8 (procedural + OOP via Database class) |
+| Database | MySQL 9 |
+| Security | PDO, prepared statements, session management |
+| Version Control | Git + GitHub |
+| Environment | PHP built-in server / XAMPP / Laragon |
 
 ---
 
-## ✨ Funcionalidades Principais
+## Features
 
-### Autenticação
-- Registo de utilizador com validação de dados
-- Login / logout com gestão de sessões (`$_SESSION`)
-- Proteção de páginas privadas (redirecionamento automático)
-- Perfis de utilizador (criador de iniciativas / colaborador)
+### Authentication
+- User registration with input validation
+- Login / logout with `$_SESSION` management
+- Private page protection via `includes/auth.php`
+- Password encryption with `password_hash()` and `password_verify()`
 
-### Iniciativas (CRUD completo)
-- Criar, editar, visualizar e remover iniciativas de impacto
-- Categorização por tipo (energia, alimentação, reciclagem, biodiversidade, etc.)
-- Localização geográfica (cidade / região)
-- Indicadores de impacto definidos pelo criador (ex: CO₂ evitado, pessoas beneficiadas)
+### Initiatives (Full CRUD)
+- Create, read, update, and delete initiatives
+- Categorization by impact type (Energy, Food, Recycling, Biodiversity, Community)
+- Location field for geographic context
+- Impact description defined by the creator
+- Public listing with search and category filter
+- Only the creator can edit or delete their own initiatives
 
-### Participações (CRUD completo)
-- Aderir a iniciativas como colaborador ou voluntário
-- Gerir o estado da participação (pendente, ativo, concluído)
-- Histórico de participações por utilizador
+### Participations (Full CRUD)
+- Join any initiative as a collaborator
+- View and manage all participations
+- Cancel participation at any time
+- Logic prevents joining your own initiative or joining twice
 
-### Dashboard
-- Visão geral das iniciativas em que o utilizador participa ou criou
-- Métricas agregadas de impacto (por utilizador e globais)
-- Feed de iniciativas recentes por localização
+### Profile
+- Private area showing initiatives created and participations joined
+- Quick access to edit and delete own initiatives
+- Summary counters for initiatives and participations
 
-### Pesquisa e Filtros
-- Filtrar iniciativas por categoria, localização e estado
-- Ordenação por data, popularidade ou impacto
-
----
-
-## 🗄️ Estrutura da Base de Dados
-
-A base de dados contém um mínimo de 4 tabelas relacionadas:
-
-- **utilizadores** — dados de autenticação e perfil
-- **iniciativas** — projetos publicados pelos utilizadores
-- **categorias** — taxonomia das iniciativas
-- **participacoes** — relação entre utilizadores e iniciativas
-
-Relações implementadas com chaves primárias e estrangeiras, com uso de `JOIN` em todas as consultas principais.
+### Public Feed
+- Homepage shows the 6 most recent initiatives
+- Full listing at `/initiatives/index.php` with search and filter
+- Accessible without login
 
 ---
 
-## 🔒 Segurança
+## 🗄️ Database Structure
 
-- Validação de inputs no cliente (JavaScript) e no servidor (PHP)
-- Uso de **PDO com prepared statements** em todas as queries
-- Sanitização de dados com `htmlspecialchars()`
-- Proteção de sessões com regeneração de ID após login
-- Proteção contra SQL Injection e acesso indevido a páginas privadas
+**4 related tables:**
+
+```sql
+users
+├── id_user (PK, AUTO_INCREMENT)
+├── name
+├── email (UNIQUE)
+├── password (hashed)
+├── birthdate
+└── gender
+
+categories
+├── id_category (PK, AUTO_INCREMENT)
+└── name
+
+initiatives
+├── id_initiative (PK, AUTO_INCREMENT)
+├── title
+├── description
+├── location
+├── impact_description
+├── created_at (DEFAULT CURRENT_TIMESTAMP)
+├── id_user (FK → users)
+└── id_category (FK → categories)
+
+participations
+├── id_participation (PK, AUTO_INCREMENT)
+├── status (DEFAULT 'pending')
+├── joined_at (DEFAULT CURRENT_TIMESTAMP)
+├── id_user (FK → users)
+└── id_initiative (FK → initiatives)
+```
+
+All queries use `JOIN`, primary keys, foreign keys, and the full range of `SELECT`, `INSERT`, `UPDATE`, `DELETE` operations.
 
 ---
 
-## 📁 Estrutura do Projeto
+## 🔒 Security
+
+- All queries use **PDO with prepared statements** — no direct string interpolation in SQL
+- All dynamic outputs use `htmlspecialchars()` — XSS protection
+- Passwords are never stored in plain text — `password_hash()` with `PASSWORD_DEFAULT`
+- Private pages redirect to login if no active session
+- Ownership checks on edit/delete — users can only modify their own data
+- Duplicate participation prevention at the database query level
+- Input validation both client-side (HTML `required`) and server-side (PHP `empty()`, `isset()`)
+
+---
+
+## Project Structure
 
 ```
-grove/
-├── index.php               # Página inicial / feed público
-├── login.php               # Autenticação
-├── register.php            # Registo de utilizador
-├── logout.php              # Encerramento de sessão
-├── dashboard.php           # Área privada do utilizador
-├── iniciativas/
-│   ├── index.php           # Listagem com filtros
-│   ├── criar.php           # Formulário de criação
-│   ├── editar.php          # Formulário de edição
-│   ├── detalhe.php         # Página de detalhe
-│   └── eliminar.php        # Remoção
-├── participacoes/
-│   ├── aderir.php          # Criar participação
-│   ├── gerir.php           # Gerir participações
-│   └── cancelar.php        # Remover participação
+php_project/
+├── index.php                   # Public homepage with recent initiatives feed
+├── login.php                   # Login form
+├── register.php                # Registration form
+├── doLogin.php                 # Login logic
+├── doRegister.php              # Registration logic
+├── logout.php                  # Session destroy and redirect
+├── profile.php                 # Private user profile
+├── README.md                   # Project Details
 ├── config/
-│   └── db.php              # Conexão PDO à base de dados
+│   └── db.php                  # Database class with PDO 
 ├── includes/
-│   ├── header.php          # Cabeçalho comum
-│   ├── footer.php          # Rodapé comum
-│   └── auth.php            # Verificação de sessão
+│   ├── auth.php                # Session guard for private pages
+│   ├── header.php              # Shared navbar and HTML head
+│   └── footer.php              # Shared footer and Bootstrap JS
+├── initiatives/
+│   ├── index.php               # Initiative listing with search and category filter
+│   ├── detail.php              # Initiative detail page
+│   ├── create.php              # Create initiative form
+│   ├── doCreate.php            # Create initiative logic
+│   ├── edit.php                # Edit initiative form (pre-filled)
+│   ├── doEdit.php              # Edit initiative logic
+│   ├── delete.php              # Delete confirmation page
+│   └── doDelete.php            # Delete initiative logic
+├── participations/
+│   ├── join.php                # Join initiative logic
+│   ├── manage.php              # List and manage participations
+│   └── cancel.php              # Cancel participation logic
 ├── assets/
-│   ├── css/
-│   │   └── style.css       # Estilos personalizados
-│   └── js/
-│       └── main.js         # Scripts front-end
+│   ├── css/style.css           # Custom styles with CSS variables
+│   └── js/main.js              # Alert auto-hide and delete confirmation
 └── sql/
-    └── grove.sql           # Script de criação da base de dados
+    └── grove.sql               # Full database schema and seed data
 ```
 
 ---
 
-## ⚙️ Instalação e Configuração Local
+## Local Setup
 
-### Pré-requisitos
+### Requirements
 - PHP 8.x
-- MySQL 8.x
-- Servidor local: XAMPP / WAMP / Laragon
+- MySQL 8.x or 9.x
+- Local server: XAMPP, Laragon, or PHP built-in server
 
-### Passos
+### Steps
 
-1. Clonar o repositório:
+1. Clone the repository:
 ```bash
-git clone https://github.com/[teu-username]/grove.git
+git clone https://github.com/paulaguollo/php_project.git
 ```
 
-2. Colocar a pasta `grove/` dentro de `htdocs/` (XAMPP) ou equivalente.
+2. Import the database:
+   - Open phpMyAdmin or MySQL terminal
+   - Create a database named `grove`
+   - Import `assets/sql/grove.sql`
 
-3. Importar a base de dados:
-   - Abrir o phpMyAdmin
-   - Criar uma base de dados chamada `grove`
-   - Importar o ficheiro `sql/grove.sql`
-
-4. Configurar a ligação à base de dados em `config/db.php`:
+3. Configure the database connection in `config/db.php`:
 ```php
-$host = 'localhost';
-$dbname = 'grove';
-$user = 'root';
-$password = '';
+private $servername = "localhost";
+private $username = "root";
+private $password = "";
+private $dbname = "grove";
 ```
 
-5. Aceder em: `http://localhost/grove`
+4. Start the server:
+```bash
+cd php_project
+php -S localhost:8000
+```
+
+5. Open in browser: `http://localhost:8000`
 
 ---
 
-## ⚠️ Limitações Conhecidas
+## Known Limitations
 
-- Sem sistema de upload de imagens (iniciativas usam imagens por URL)
-- Sem sistema de mensagens entre utilizadores
-- Sem autenticação por email (verificação de conta não implementada)
-- Indicadores de impacto são inseridos manualmente pelo criador
-
----
-
-## 🚀 Ideias Futuras
-
-- Sistema de notificações em tempo real
-- Mapa interativo de iniciativas por geolocalização
-- API REST para integração com apps móveis
-- Sistema de badges/conquistas por impacto acumulado
-- Moderação de conteúdo por administradores
-- Integração com redes sociais para partilha de iniciativas
+- No image upload — initiatives use text descriptions only
+- No email verification on registration
+- No admin panel or content moderation
+- Impact metrics are self-reported by initiative creators
+- No real-time notifications
 
 ---
 
-## 👤 Autor
+## Future Ideas
 
-Desenvolvido no âmbito do Trabalho Prático da formação de **Desenvolvimento Web (back-end)** — CESAE Digital.
+- Interactive map showing initiatives by geolocation
+- Badge and achievement system based on accumulated impact
+- REST API for mobile app integration
+- Admin dashboard for content moderation
+- Social sharing of initiatives
+- Messaging between users and initiative creators
 
 ---
 
-*Grove — Where impact grows.* 🌿
+## Author
+
+By Paula Guollo Developed as the final practical project for **Web Development (Back-end)** — CESAE Digital.

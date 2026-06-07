@@ -1,56 +1,211 @@
-root {
+@import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600&display=swap');
+
+:root {
     --color-primary: #1D9E75;
     --color-primary-dark: #0f6e56;
-    --color-background: #f8f9f4;
-    --color-text: #2c2c2a;
-    --color-card-shadow: rgba(0,0,0,0.08);
+    --color-primary-light: #e1f5ee;
+    --color-background: #f7f5f0;
+    --color-surface: #ffffff;
+    --color-text: #1a1a18;
+    --color-text-muted: #6b7280;
+    --color-border: rgba(0,0,0,0.07);
+    --color-card-shadow: rgba(0,0,0,0.06);
     --color-badge-bg: #e1f5ee;
     --color-badge-text: #0f6e56;
-    --border-radius-card: 12px;
+    --border-radius-card: 16px;
     --border-radius-badge: 20px;
+    --border-radius-btn: 10px;
 }
 
+/* Base */
 body {
     background-color: var(--color-background);
     color: var(--color-text);
-    font-family: 'Segoe UI', sans-serif;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+    font-size: 15px;
+    line-height: 1.6;
+}
+
+/* Navbar */
+.navbar {
+    background-color: rgba(247, 245, 240, 0.92) !important;
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--color-border);
+    padding: 1rem 0;
 }
 
 .navbar-brand {
-    font-weight: 600;
-    font-size: 1.3rem;
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-style: italic;
+    font-size: 1.5rem;
+    color: var(--color-primary-dark) !important;
+    font-weight: 400;
 }
 
+.nav-link {
+    color: var(--color-text) !important;
+    font-weight: 500;
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem !important;
+    border-radius: 8px;
+    transition: background 0.15s;
+}
+
+.nav-link:hover {
+    background-color: var(--color-primary-light);
+    color: var(--color-primary-dark) !important;
+}
+
+/* Cards */
 .card {
-    border: none;
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
     border-radius: var(--border-radius-card);
-    box-shadow: 0 2px 8px var(--color-card-shadow);
-    margin-bottom: 1.5rem;
+    box-shadow: 0 1px 4px var(--color-card-shadow);
+    margin-bottom: 1.25rem;
+    transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.card:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
 }
 
 .card-title {
-    font-weight: 600;
-    color: var(--color-primary-dark);
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-weight: 400;
+    font-size: 1.2rem;
+    color: var(--color-text);
+}
+
+/* Buttons */
+.btn {
+    border-radius: var(--border-radius-btn);
+    font-weight: 500;
+    font-size: 0.875rem;
+    padding: 0.5rem 1.1rem;
+    transition: all 0.15s;
 }
 
 .btn-primary {
     background-color: var(--color-primary);
     border-color: var(--color-primary);
+    color: #fff;
 }
 
 .btn-primary:hover {
     background-color: var(--color-primary-dark);
     border-color: var(--color-primary-dark);
+    transform: translateY(-1px);
 }
 
-.alert {
-    border-radius: 8px;
+.btn-outline-secondary {
+    border-color: var(--color-border);
+    color: var(--color-text-muted);
+    background: var(--color-surface);
 }
 
+.btn-outline-secondary:hover {
+    background-color: var(--color-background);
+    border-color: #c0c0b8;
+    color: var(--color-text);
+}
+
+/* Badges */
 .badge-category {
     background-color: var(--color-badge-bg);
     color: var(--color-badge-text);
-    padding: 4px 10px;
+    padding: 4px 12px;
     border-radius: var(--border-radius-badge);
-    font-size: 0.75rem;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    display: inline-block;
+}
+
+/* Alerts */
+.alert {
+    border-radius: 12px;
+    border: none;
+    font-size: 0.9rem;
+}
+
+.alert-success {
+    background-color: var(--color-primary-light);
+    color: var(--color-primary-dark);
+}
+
+.alert-danger {
+    background-color: #fde8e8;
+    color: #9b1c1c;
+}
+
+/* Forms */
+.form-control, .form-select {
+    border-radius: 10px;
+    border: 1px solid #ddddd5;
+    font-size: 0.9rem;
+    padding: 0.6rem 0.9rem;
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.form-control:focus, .form-select:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(29, 158, 117, 0.12);
+    outline: none;
+}
+
+.form-label {
+    font-weight: 500;
+    font-size: 0.85rem;
+    color: var(--color-text-muted);
+    margin-bottom: 0.35rem;
+}
+
+/* Text muted override */
+.text-muted {
+    color: var(--color-text-muted) !important;
+    font-size: 0.875rem;
+}
+
+/* Hero (index.php) */
+.grove-hero {
+    padding: 5rem 0 3rem;
+    text-align: center;
+}
+
+.grove-hero h1 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-style: italic;
+    font-size: 4rem;
+    color: var(--color-primary-dark);
+    font-weight: 400;
+    line-height: 1.1;
+}
+
+.grove-hero p.lead {
+    font-size: 1.1rem;
+    color: var(--color-text-muted);
+    margin-top: 0.75rem;
+}
+
+/* Section titles */
+h2, h4 {
+    font-family: 'DM Serif Display', Georgia, serif;
+    font-weight: 400;
+}
+
+/* Footer */
+footer {
+    background-color: var(--color-surface) !important;
+    border-top: 1px solid var(--color-border);
+    color: var(--color-text-muted) !important;
+    font-size: 0.85rem;
+}
+
+footer p {
+    color: var(--color-text-muted);
+    margin: 0;
 }

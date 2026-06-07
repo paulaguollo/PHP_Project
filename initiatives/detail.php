@@ -56,7 +56,7 @@ if (isset($_SESSION['id_user'])) {
 
         <?php if ($initiative->impact_description): ?>
             <div class="alert alert-success mt-3">
-                🌱 Impact: <?= htmlspecialchars($initiative->impact_description) ?>
+                 Impact: <?= htmlspecialchars($initiative->impact_description) ?>
             </div>
         <?php endif; ?>
 

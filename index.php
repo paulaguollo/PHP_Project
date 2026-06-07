@@ -17,16 +17,18 @@ $initiatives = $result['status'] === 'success' ? $result['data'] : [];
 ?>
 
 <div class="container mt-5">
-    <div class="text-center mb-5">
-        <h1>🌿 Grove</h1>
+    <div class="grove-hero>
+        <h1>Grove</h1>
         <p class="lead text-muted">Where impact grows.</p>
         <?php if (!isset($_SESSION['id_user'])): ?>
+            <div class="text-center mt-4">
             <a href="register.php" class="btn btn-primary me-2">Join Grove</a>
             <a href="login.php" class="btn btn-outline-secondary">Login</a>
         <?php else: ?>
             <a href="initiatives/create.php" class="btn btn-primary me-2">+ New initiative</a>
             <a href="profile.php" class="btn btn-outline-secondary">Profile</a>
         <?php endif; ?>
+         </div>
     </div>
 
     <h4 class="mb-4">Recent initiatives</h4>
@@ -52,6 +54,7 @@ $initiatives = $result['status'] === 'success' ? $result['data'] : [];
         <div class="text-center mt-4">
             <a href="initiatives/index.php" class="btn btn-outline-secondary">See all initiatives</a>
         </div>
+        <br>
     <?php endif; ?>
 </div>
 

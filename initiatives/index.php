@@ -34,7 +34,7 @@ $categories = $resultCategories['status'] === 'success' ? $resultCategories['dat
 
 <div class="container mt-5">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2>Initiatives 🌿</h2>
+        <h2>Initiatives</h2>
         <?php if (isset($_SESSION['id_user'])): ?>
             <a href="create.php" class="btn btn-primary">+ New initiative</a>
         <?php endif; ?>
