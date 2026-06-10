@@ -20,7 +20,7 @@ $initiatives = $result['status'] === 'success' ? $result['data'] : [];
 
     <div class="grove-hero">
         <div>
-            <h1>No impact grows alone.</h1>
+            <h1>Impact grows together.</h1>
             <p>Grove is a platform for people and communities to publish, discover and join sustainable impact initiatives.</p>
             <div class="d-flex gap-2 flex-wrap">
                 <a href="initiatives/index.php" class="btn btn-primary">
@@ -36,7 +36,7 @@ $initiatives = $result['status'] === 'success' ? $result['data'] : [];
             </div>
         </div>
         <div class="d-none d-md-block text-center">
-            <i class="bi bi-diagram-3" style="font-size: 8rem; color: var(--color-primary); opacity: 0.15;"></i>
+           <img src="/assets/img/landing.png" alt="Grove" class="img-fluid" style="max-width: 500px;">
         </div>
     </div>
 

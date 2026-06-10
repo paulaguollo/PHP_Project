@@ -122,13 +122,14 @@ All queries use `JOIN`, primary keys, foreign keys, and the full range of `SELEC
 
 ```
 php_project/
-├── index.php                   # Public homepage with recent initiatives feed
+├── index.php                   # LandingPage with recent initiatives feed
 ├── login.php                   # Login form
 ├── register.php                # Registration form
 ├── doLogin.php                 # Login logic
 ├── doRegister.php              # Registration logic
 ├── logout.php                  # Session destroy and redirect
 ├── profile.php                 # Private user profile
+├── about.php                   # About Grove and creator
 ├── README.md                   # Project Details
 ├── config/
 │   └── db.php                  # Database class with PDO 

@@ -20,7 +20,7 @@ $myParticipations = $resultParticipations['status'] === 'success' ? $resultParti
 ?>
 
 <div class="container mt-5">
-    <h2 class="mb-4">Welcome, <?= htmlspecialchars($_SESSION['name']) ?> 🌿</h2>
+    <h2 class="mb-4">Welcome, <?= htmlspecialchars($_SESSION['name']) ?></h2>
 
     <div class="row mb-5">
         <div class="col-md-4">
