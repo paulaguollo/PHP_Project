@@ -26,22 +26,22 @@ if (session_status() === PHP_SESSION_NONE) {
             <ul class="navbar-nav ms-auto align-items-center gap-2">
                 <?php if (isset($_SESSION['id_user'])): ?>
                     <li class="nav-item"><a class="nav-link" href="/initiatives/index.php">Discover</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/about.php">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/profile.php">Profile</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/pages/about.php">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/pages/profile.php">Profile</a></li>
                     <li class="nav-item">
                         <a class="btn btn-primary btn-sm" href="/initiatives/create.php">
                             <i class="bi bi-plus-lg me-1"></i>New initiative
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="btn btn-outline-secondary btn-sm" href="/logout.php">Logout</a>
+                        <a class="btn btn-outline-secondary btn-sm" href="/pages/logout.php">Logout</a>
                     </li>
                 <?php else: ?>
                     <li class="nav-item"><a class="nav-link" href="/initiatives/index.php">Discover</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/about.php">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="/login.php">Login</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/pages/about.php">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/pages/login.php">Login</a></li>
                     <li class="nav-item">
-                        <a class="btn btn-primary btn-sm" href="/register.php">Join Grove</a>
+                        <a class="btn btn-primary btn-sm" href="/pages/register.php">Join Grove</a>
                     </li>
                 <?php endif; ?>
             </ul>

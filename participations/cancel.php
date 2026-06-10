@@ -5,7 +5,7 @@ require_once '../config/db.php';
 $db = new Database();
 
 if (!isset($_POST['id_initiative'])) {
-    header('Location: ../profile.php');
+    header('Location: /pages/profile.php');
     exit;
 }
 
@@ -21,9 +21,9 @@ $result = $db->executeQuery($sql, [
 ]);
 
 if ($result['status'] === 'success') {
-    header('Location: ../profile.php?res=cancelled');
+    header('Location: /pages/profile.php?res=cancelled');
 } else {
-    header('Location: ../profile.php?res=error');
+    header('Location: /pages/profile.php?res=error');
 }
 exit;
 ?>

@@ -26,7 +26,7 @@ $initiatives = $result['status'] === 'success' ? $result['data'] : [];
                     <i class="bi bi-compass me-1"></i> Discover initiatives
                 </a>
                 <?php if (!isset($_SESSION['id_user'])): ?>
-                    <a href="register.php" class="btn btn-outline-primary">Join Grove</a>
+                    <a href="/pages/register.php" class="btn btn-outline-primary">Join Grove</a>
                 <?php else: ?>
                     <a href="initiatives/create.php" class="btn btn-outline-primary">
                         <i class="bi bi-plus-lg me-1"></i> Create initiative
@@ -48,7 +48,7 @@ $initiatives = $result['status'] === 'success' ? $result['data'] : [];
         <div class="text-center py-5">
             <i class="bi bi-tree fs-1 text-muted"></i>
             <p class="text-muted mt-3">No initiatives yet. Be the first to create one.</p>
-            <a href="register.php" class="btn btn-primary mt-2">Get started</a>
+            <a href="/pages/register.php" class="btn btn-primary mt-2">Get started</a>
         </div>
     <?php else: ?>
         <div class="row g-3">

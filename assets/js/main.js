@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Confirm before deleting
 document.addEventListener('DOMContentLoaded', function () {
-    const deleteForms = document.querySelectorAll('form[action="doDelete.php"]');
+    const deleteForms = document.querySelectorAll('form[action="/pages/doDelete.php"]');
     deleteForms.forEach(function (form) {
         form.addEventListener('submit', function (e) {
             if (!confirm('Are you sure you want to delete this initiative?')) {

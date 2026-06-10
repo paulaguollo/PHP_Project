@@ -41,7 +41,7 @@ CREATE TABLE participations (
 );
 
 
-## TESTE DE DADOS
+-- TESTE DE DADOS
 
 INSERT INTO categories (name) VALUES 
 ('Energy'),
@@ -51,7 +51,7 @@ INSERT INTO categories (name) VALUES
 ('Community');
 
 INSERT INTO users (name, email, password, birthdate, gender) VALUES
-('Paula Teste', 'paula@grove.com', '123456', '2001-12-25', 'Female');
+('Paula', 'paula@grove.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', '2001-12-25', 'Female');
 
 INSERT INTO initiatives (title, description, location, impact_description, id_user, id_category) VALUES
 ('Community Garden Porto', 'A shared garden open to everyone in the Porto neighbourhood.', 'Porto', '30 families benefited', 1, 2);
