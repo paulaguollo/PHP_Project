@@ -16,46 +16,63 @@ $result = $db->fetchQuery($sql, []);
 $initiatives = $result['status'] === 'success' ? $result['data'] : [];
 ?>
 
-<div class="container mt-5">
-    <div class="grove-hero>
-        <h1>Grove</h1>
-        <p class="lead text-muted">Where impact grows.</p>
-        <?php if (!isset($_SESSION['id_user'])): ?>
-            <div class="text-center mt-4">
-            <a href="register.php" class="btn btn-primary me-2">Join Grove</a>
-            <a href="login.php" class="btn btn-outline-secondary">Login</a>
-        <?php else: ?>
-            <a href="initiatives/create.php" class="btn btn-primary me-2">+ New initiative</a>
-            <a href="profile.php" class="btn btn-outline-secondary">Profile</a>
-        <?php endif; ?>
-         </div>
+<div class="container">
+
+    <div class="grove-hero">
+        <div>
+            <h1>No impact grows alone.</h1>
+            <p>Grove is a platform for people and communities to publish, discover and join sustainable impact initiatives.</p>
+            <div class="d-flex gap-2 flex-wrap">
+                <a href="initiatives/index.php" class="btn btn-primary">
+                    <i class="bi bi-compass me-1"></i> Discover initiatives
+                </a>
+                <?php if (!isset($_SESSION['id_user'])): ?>
+                    <a href="register.php" class="btn btn-outline-primary">Join Grove</a>
+                <?php else: ?>
+                    <a href="initiatives/create.php" class="btn btn-outline-primary">
+                        <i class="bi bi-plus-lg me-1"></i> Create initiative
+                    </a>
+                <?php endif; ?>
+            </div>
+        </div>
+        <div class="d-none d-md-block text-center">
+            <i class="bi bi-diagram-3" style="font-size: 8rem; color: var(--color-primary); opacity: 0.15;"></i>
+        </div>
     </div>
 
-    <h4 class="mb-4">Recent initiatives</h4>
+    <div class="d-flex justify-content-between align-items-center mb-4 mt-5">
+        <h2>Recent initiatives</h2>
+        <a href="initiatives/index.php" class="btn btn-outline-secondary btn-sm">See all</a>
+    </div>
 
     <?php if (empty($initiatives)): ?>
-        <p class="text-muted text-center">No initiatives yet. Be the first to create one!</p>
+        <div class="text-center py-5">
+            <i class="bi bi-tree fs-1 text-muted"></i>
+            <p class="text-muted mt-3">No initiatives yet. Be the first to create one.</p>
+            <a href="register.php" class="btn btn-primary mt-2">Get started</a>
+        </div>
     <?php else: ?>
-        <div class="row">
+        <div class="row g-3">
             <?php foreach ($initiatives as $initiative): ?>
-                <div class="col-md-6 mb-3">
-                    <div class="card p-3 h-100">
-                        <div class="d-flex justify-content-between mb-2">
-                            <h5 class="mb-0"><?= htmlspecialchars($initiative->title) ?></h5>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card p-4 h-100 d-flex flex-column">
+                        <div class="d-flex justify-content-between align-items-start mb-3">
                             <span class="badge-category"><?= htmlspecialchars($initiative->category) ?></span>
                         </div>
-                        <p class="text-muted mb-1">📍 <?= htmlspecialchars($initiative->location) ?></p>
-                        <p class="mb-3"><?= htmlspecialchars($initiative->description) ?></p>
-                        <a href="initiatives/detail.php?id=<?= $initiative->id_initiative ?>" class="btn btn-sm btn-primary mt-auto">View</a>
+                        <h5 class="card-initiative mb-2"><?= htmlspecialchars($initiative->title) ?></h5>
+                        <p class="text-muted mb-1">
+                            <i class="bi bi-geo-alt me-1"></i><?= htmlspecialchars($initiative->location) ?>
+                        </p>
+                        <p class="text-muted mb-3 flex-grow-1"><?= htmlspecialchars($initiative->description) ?></p>
+                        <a href="initiatives/detail.php?id=<?= $initiative->id_initiative ?>" class="btn btn-outline-primary btn-sm mt-auto">
+                            View initiative <i class="bi bi-arrow-right ms-1"></i>
+                        </a>
                     </div>
                 </div>
             <?php endforeach; ?>
         </div>
-        <div class="text-center mt-4">
-            <a href="initiatives/index.php" class="btn btn-outline-secondary">See all initiatives</a>
-        </div>
-        <br>
     <?php endif; ?>
+
 </div>
 
 <?php require_once 'includes/footer.php'; ?>
