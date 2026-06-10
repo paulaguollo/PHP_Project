@@ -1,16 +1,15 @@
 <?php
-session_start();
 require_once '../includes/auth.php';
 require_once '../config/db.php';
 
 $db = new Database();
 
-if (!isset($_GET['id_initiative'])) {
-    header('Location: manage.php');
+if (!isset($_POST['id_initiative'])) {
+    header('Location: ../profile.php');
     exit;
 }
 
-$id_initiative = $_GET['id_initiative'];
+$id_initiative = $_POST['id_initiative'];
 $id_user = $_SESSION['id_user'];
 
 $sql = "DELETE FROM participations 
@@ -22,9 +21,9 @@ $result = $db->executeQuery($sql, [
 ]);
 
 if ($result['status'] === 'success') {
-    header('Location: manage.php?res=cancelled');
+    header('Location: ../profile.php?res=cancelled');
 } else {
-    header('Location: manage.php?res=error');
+    header('Location: ../profile.php?res=error');
 }
 exit;
 ?>

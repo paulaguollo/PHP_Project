@@ -1,5 +1,4 @@
 <?php
-session_start();
 require_once 'includes/auth.php';
 require_once 'config/db.php';
 require_once 'includes/header.php';
@@ -64,7 +63,10 @@ $myParticipations = $resultParticipations['status'] === 'success' ? $resultParti
                         <p class="text-muted mb-0">📍 <?= htmlspecialchars($participation->location) ?></p>
                         <span class="badge-category"><?= htmlspecialchars($participation->category) ?></span>
                     </div>
-                    <a href="participations/cancel.php?id_initiative=<?= $participation->id_initiative ?>" class="btn btn-sm btn-outline-danger">Cancel</a>
+        <form action="participations/cancel.php" method="POST" style="display:inline;">
+    <input type="hidden" name="id_initiative" value="<?= $participation->id_initiative ?>">
+    <button type="submit" class="btn btn-sm btn-outline-danger">Cancel</button>
+</form>
                 </div>
             </div>
         <?php endforeach; ?>

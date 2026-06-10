@@ -148,7 +148,6 @@ php_project/
 │   └── doDelete.php            # Delete initiative logic
 ├── participations/
 │   ├── join.php                # Join initiative logic
-│   ├── manage.php              # List and manage participations
 │   └── cancel.php              # Cancel participation logic
 ├── assets/
 │   ├── css/style.css           # Custom styles with CSS variables
