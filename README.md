@@ -29,7 +29,7 @@ The platform addresses a real gap: there is no simple, open tool for people to o
 | Database | MySQL 9 |
 | Security | PDO, prepared statements, session management |
 | Version Control | Git + GitHub |
-| Environment | PHP built-in server / XAMPP / Laragon |
+| Environment | PHP built-in server (Homebrew) |
 
 ---
 
@@ -122,18 +122,18 @@ All queries use `JOIN`, primary keys, foreign keys, and the full range of `SELEC
 
 ```
 php_project/
-├── index.php                   # LandingPage with recent initiatives feed
-├── README.md                   # Project Details
+├── index.php                   # Landing page with recent initiatives feed
+├── README.md                   # Project details
 ├── pages/
-├── login.php                   # Login form
-├── register.php                # Registration form
-├── doLogin.php                 # Login logic
-├── doRegister.php              # Registration logic
-├── logout.php                  # Session destroy and redirect
-├── profile.php                 # Private user profile
-├── about.php                   # About Grove and creator
+│   ├── login.php               # Login form
+│   ├── register.php            # Registration form
+│   ├── doLogin.php             # Login logic
+│   ├── doRegister.php          # Registration logic
+│   ├── logout.php              # Session destroy and redirect
+│   ├── profile.php             # Private user profile
+│   └── about.php               # About Grove and creator
 ├── config/
-│   └── db.php                  # Database class with PDO 
+│   └── db.php                  # Database class with PDO
 ├── includes/
 │   ├── auth.php                # Session guard for private pages
 │   ├── header.php              # Shared navbar and HTML head
@@ -153,7 +153,7 @@ php_project/
 ├── assets/
 │   ├── css/style.css           # Custom styles with CSS variables
 │   └── js/main.js              # Alert auto-hide and delete confirmation
-└── sql/
+└── assets/sql/
     └── grove.sql               # Full database schema and seed data
 ```
 
@@ -162,9 +162,8 @@ php_project/
 ## Local Setup
 
 ### Requirements
-- PHP 8.x
-- MySQL 8.x or 9.x
-- Local server: XAMPP, Laragon, or PHP built-in server
+- PHP 8.x (Homebrew)
+- MySQL 9.x (Homebrew)
 
 ### Steps
 
@@ -174,9 +173,11 @@ git clone https://github.com/paulaguollo/php_project.git
 ```
 
 2. Import the database:
-   - Open phpMyAdmin or MySQL terminal
-   - Create a database named `grove`
-   - Import `assets/sql/grove.sql`
+```bash
+brew services start mysql
+mysql -u root -p -e "CREATE DATABASE grove;"
+mysql -u root -p grove < assets/sql/grove.sql
+```
 
 3. Configure the database connection in `config/db.php`:
 ```php
@@ -219,4 +220,4 @@ php -S localhost:8000
 
 ## Author
 
-By Paula Guollo Developed as the final practical project for **Web Development (Back-end)** — CESAE Digital.
+By Paula Guollo — Developed as the final practical project for **Web Development (Back-end)** — CESAE Digital.

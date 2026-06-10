@@ -15,7 +15,7 @@ $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 $birthdate = $_POST['birthdate'] ?? null;
 $gender = $_POST['gender'] ?? null;
 
-if (empty($name) || empty($email) || empty($_POST['password'])) {
+if (empty($name) || empty($email) || empty($_POST['password']) || strlen($_POST['password']) < 6) {
     header('Location: register.php?res=error');
     exit;
 }
