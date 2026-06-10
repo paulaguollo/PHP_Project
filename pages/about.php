@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'includes/header.php';
+require_once '../includes/header.php';
 ?>
 
 <div class="container py-5">
@@ -77,4 +77,4 @@ require_once 'includes/header.php';
 
 </div>
 
-<?php require_once 'includes/footer.php'; ?>
+<?php require_once '../includes/footer.php'; ?>

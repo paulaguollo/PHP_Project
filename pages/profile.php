@@ -1,7 +1,7 @@
 <?php
-require_once 'includes/auth.php';
-require_once 'config/db.php';
-require_once 'includes/header.php';
+require_once '../includes/auth.php';
+require_once '../config/db.php';
+require_once '../includes/header.php';
 
 $db = new Database();
 
@@ -38,22 +38,22 @@ $myParticipations = $resultParticipations['status'] === 'success' ? $resultParti
 
     <h4 class="mb-3">My initiatives</h4>
     <?php if (empty($myInitiatives)): ?>
-        <p class="text-muted">No initiatives yet. <a href="initiatives/create.php">Create one!</a></p>
+        <p class="text-muted">No initiatives yet. <a href="/initiatives/create.php">Create one!</a></p>
     <?php else: ?>
         <?php foreach ($myInitiatives as $initiative): ?>
             <div class="card p-3">
                 <h5><?= htmlspecialchars($initiative->title) ?></h5>
                 <p class="text-muted">📍 <?= htmlspecialchars($initiative->location) ?></p>
-                <a href="initiatives/detail.php?id=<?= $initiative->id_initiative ?>" class="btn btn-sm btn-primary">View</a>
-                <a href="initiatives/edit.php?id=<?= $initiative->id_initiative ?>" class="btn btn-sm btn-outline-secondary ms-1">Edit</a>
-                <a href="initiatives/delete.php?id=<?= $initiative->id_initiative ?>" class="btn btn-sm btn-outline-danger ms-1">Delete</a>
+                <a href="/initiatives/detail.php?id=<?= $initiative->id_initiative ?>" class="btn btn-sm btn-primary">View</a>
+                <a href="/initiatives/edit.php?id=<?= $initiative->id_initiative ?>" class="btn btn-sm btn-outline-secondary ms-1">Edit</a>
+                <a href="/initiatives/delete.php?id=<?= $initiative->id_initiative ?>" class="btn btn-sm btn-outline-danger ms-1">Delete</a>
             </div>
         <?php endforeach; ?>
     <?php endif; ?>
 
     <h4 class="mt-5 mb-3">My participations</h4>
     <?php if (empty($myParticipations)): ?>
-        <p class="text-muted">Not participating in any initiative yet. <a href="initiatives/index.php">Explore!</a></p>
+        <p class="text-muted">Not participating in any initiative yet. <a href="/initiatives/index.php">Explore!</a></p>
     <?php else: ?>
         <?php foreach ($myParticipations as $participation): ?>
             <div class="card p-3">
@@ -63,7 +63,7 @@ $myParticipations = $resultParticipations['status'] === 'success' ? $resultParti
                         <p class="text-muted mb-0">📍 <?= htmlspecialchars($participation->location) ?></p>
                         <span class="badge-category"><?= htmlspecialchars($participation->category) ?></span>
                     </div>
-        <form action="participations/cancel.php" method="POST" style="display:inline;">
+        <form action="/participations/cancel.php" method="POST" style="display:inline;">
     <input type="hidden" name="id_initiative" value="<?= $participation->id_initiative ?>">
     <button type="submit" class="btn btn-sm btn-outline-danger">Cancel</button>
 </form>
@@ -73,4 +73,4 @@ $myParticipations = $resultParticipations['status'] === 'success' ? $resultParti
     <?php endif; ?>
 </div>
 
-<?php require_once 'includes/footer.php'; ?>
+<?php require_once '../includes/footer.php'; ?>
