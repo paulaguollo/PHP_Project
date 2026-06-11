@@ -45,7 +45,7 @@ if (session_status() === PHP_SESSION_NONE) {
                         <a class="btn btn-outline-secondary btn-sm" href="/pages/logout.php">Logout</a>
                     </li>
                 <?php else: ?>
-                    //isset session id_user == false 
+                    <!--isset session id_user == false-->
                     <!-- Menu para visitante (não autenticado) -->
                     <li class="nav-item"><a class="nav-link" href="/initiatives/index.php">Discover</a></li>
                     <li class="nav-item"><a class="nav-link" href="/pages/about.php">About</a></li>

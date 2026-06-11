@@ -25,7 +25,8 @@ $initiatives = $result['status'] === 'success' ? $result['data'] : [];
                 <a href="initiatives/index.php" class="btn btn-primary">
                     <i class="bi bi-compass me-1"></i> Discover initiatives
                 </a>
-                <?php if (!isset($_SESSION['id_user'])): ?> //login == false
+                <?php if (!isset($_SESSION['id_user'])): ?> 
+                    <!--login == false-->
                     <a href="/pages/register.php" class="btn btn-outline-primary">Join Grove</a>
                 <?php else: ?>
                     <a href="initiatives/create.php" class="btn btn-outline-primary">
