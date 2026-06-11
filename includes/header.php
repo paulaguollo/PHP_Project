@@ -31,7 +31,7 @@ if (session_status() === PHP_SESSION_NONE) {
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto align-items-center gap-2">
                 <?php if (isset($_SESSION['id_user'])): ?>
-                     //isset() verifica se não é null. true ou false
+                    <!-- isset() verifica se não é null. true ou false -->
                     <!-- Menu para utilizador autenticado -->
                     <li class="nav-item"><a class="nav-link" href="/initiatives/index.php">Discover</a></li>
                     <li class="nav-item"><a class="nav-link" href="/pages/about.php">About</a></li>
