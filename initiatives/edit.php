@@ -12,6 +12,8 @@ if (!isset($_GET['id'])) {
 
 $id = $_GET['id'];
 
+
+//filtra por iniciativa então só pode ser 0 ou 1. Por isso existe o erraylist e pega o indice para data em $result
 $sql = "SELECT * FROM initiatives WHERE id_initiative = :id AND id_user = :id_user";
 $result = $db->fetchQuery($sql, ['id' => $id, 'id_user' => $_SESSION['id_user']]);
 $initiative = ($result['status'] === 'success' && !empty($result['data'])) ? $result['data'][0] : null;
@@ -21,6 +23,7 @@ if (!$initiative) {
     exit;
 }
 
+//como tem varias categorias entao percorre com foreach []
 $resultCategories = $db->fetchQuery("SELECT * FROM categories", []);
 $categories = $resultCategories['status'] === 'success' ? $resultCategories['data'] : [];
 ?>
@@ -56,12 +59,15 @@ $categories = $resultCategories['status'] === 'success' ? $resultCategories['dat
                     <div class="mb-3">
                         <label class="form-label">Category *</label>
                         <select name="id_category" class="form-select" required>
+
+                            //Criação do select para categorias 
                             <?php foreach ($categories as $category): ?>
                                 <option value="<?= $category->id_category ?>" 
                                     <?= $category->id_category == $initiative->id_category ? 'selected' : '' ?>>
                                     <?= htmlspecialchars($category->name) ?>
                                 </option>
                             <?php endforeach; ?>
+    
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary w-100">Save changes</button>

@@ -6,12 +6,12 @@ $db = new Database();
 
 $sql = "SELECT initiatives.*, users.name AS author, categories.name AS category
         FROM initiatives
-        JOIN users ON initiatives.id_user = users.id_user
-        JOIN categories ON initiatives.id_category = categories.id_category
+        JOIN users ON initiatives.id_user = users.id_user <--saber o nome do user pelo id em comum das tabelas-->
+        JOIN categories ON initiatives.id_category = categories.id_category <--saber o nome da categoria pelo id em comum das tabelas-->
         ORDER BY initiatives.created_at DESC
-        LIMIT 6";
+        LIMIT 6"; //limite de iniciativas que aparece na landing page
 
-$result = $db->fetchQuery($sql, []);
+$result = $db->fetchQuery($sql, []); //busca a função dentro do objeto DB e devolve na variavel result
 $initiatives = $result['status'] === 'success' ? $result['data'] : [];
 ?>
 
@@ -25,7 +25,7 @@ $initiatives = $result['status'] === 'success' ? $result['data'] : [];
                 <a href="initiatives/index.php" class="btn btn-primary">
                     <i class="bi bi-compass me-1"></i> Discover initiatives
                 </a>
-                <?php if (!isset($_SESSION['id_user'])): ?>
+                <?php if (!isset($_SESSION['id_user'])): ?> //login == false
                     <a href="/pages/register.php" class="btn btn-outline-primary">Join Grove</a>
                 <?php else: ?>
                     <a href="initiatives/create.php" class="btn btn-outline-primary">
@@ -60,7 +60,9 @@ $initiatives = $result['status'] === 'success' ? $result['data'] : [];
                         </div>
                         <h5 class="card-initiative mb-2"><?= htmlspecialchars($initiative->title) ?></h5>
                         <p class="text-muted mb-1">
-                            <i class="bi bi-geo-alt me-1"></i><?= htmlspecialchars($initiative->location) ?>
+                            <i class="bi bi-geo-alt me-1"></i><?= htmlspecialchars 
+                            // transforma caracteres especiais como < e > em código seguro, para que ninguém consiga, por exemplo, escrever <script> no título de uma iniciativa e fazer esse script correr no browser de outra pessoa. É uma proteção de segurança chamada XSS.
+                            ($initiative->location) ?>
                         </p>
                         <p class="text-muted mb-3 flex-grow-1"><?= htmlspecialchars($initiative->description) ?></p>
                         <a href="initiatives/detail.php?id=<?= $initiative->id_initiative ?>" class="btn btn-outline-primary btn-sm mt-auto">

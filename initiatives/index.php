@@ -4,9 +4,12 @@ require_once '../includes/header.php';
 
 $db = new Database();
 
-$where = "WHERE 1=1";
+$where = "WHERE 1=1"; //é sempre verdadeiro
 $params = [];
 
+
+//se o user escrever algo entao será buscado. 
+//aqui é o filtro de pesquisa
 if (!empty($_GET['search'])) {
     $where .= " AND (initiatives.title LIKE :search OR initiatives.description LIKE :search)";
     $params['search'] = '%' . $_GET['search'] . '%';
